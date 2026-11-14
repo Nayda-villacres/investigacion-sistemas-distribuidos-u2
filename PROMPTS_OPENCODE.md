@@ -4,8 +4,6 @@
 
 OpenCode 2.2.7, instalado en la computadora de la autora y utilizado desde la terminal de Windows, fue el copiloto consultado para propuestas de código Python, revisión del diseño experimental, bloques Quarto con `label` y `fig-cap`, y formato BibTeX. Las consultas históricas y sus respuestas se conservan más abajo, incluidas sugerencias descartadas o corregidas. No se atribuye a esas consultas la ejecución de los benchmarks.
 
-**Declaración complementaria de asistencia:** también se utilizó Codex para implementar y auditar el código, ejecutar comandos y experimentos, comprobar referencias, redactar y compilar el documento, y publicar los archivos. Esta participación ocurrió y se mantiene declarada para que la documentación no sugiera un uso exclusivo de OpenCode. La identificación de funciones de cada herramienta es una declaración de procedencia, no una atribución a OpenCode de actividades ajenas. La autora aportó la revisión declarada y las valoraciones personales registradas.
-
 ### Verificación previa al ajuste documental
 
 Antes de esta revisión se cotejaron los registros locales JSONL de OpenCode y las acciones de esta sesión. Se identificaron cinco consultas con respuestas sustantivas, una consulta inicial fallida por autenticación, una revisión de archivos sin una auditoría final utilizable y su intento de continuación sin respuesta utilizable. Las respuestas verificadas respaldan únicamente los aportes indicados en la tabla.
@@ -20,13 +18,19 @@ Antes de esta revisión se cotejaron los registros locales JSONL de OpenCode y l
 
 Se conserva el historial de prompts, incidencias, atribuciones y respuestas humanas que sigue. La revisión documental concentra la explicación de OpenCode en el artículo y el README y remite aquí a la declaración completa; no elimina una herramienta efectivamente utilizada ni modifica retrospectivamente la autoría de las acciones. No se ejecutaron nuevos prompts a OpenCode para atribuirlos a etapas anteriores. Los datos, el benchmark, la bibliografía científica, las conclusiones y las limitaciones del experimento se mantienen.
 
+## Nota editorial sobre la denominación del asistente adicional
+
+Esta versión usa denominaciones funcionales para la asistencia adicional. Cuando un prompt citado tenía esa denominación comercial, se presenta con el nombre editado ("asistente adicional de IA" o el rol real correspondiente). El texto literal original está disponible en la versión histórica pública: https://github.com/Nayda-villacres/investigacion-sistemas-distribuidos-u2/blob/1209b6158ed622f0c2b3b5e2798ec51710516f9a/PROMPTS_OPENCODE.md
+
+Esto no implica que OpenCode haya sido la única herramienta de IA utilizada en todo el desarrollo: los registros acreditan la intervención previa del asistente adicional de IA. OpenCode se presenta como asistente oficial de la revisión y de la guía, sin ocultar esa asistencia adicional real.
+
 ## Historial de desarrollo y revisión
 
 Fecha local: 13 de noviembre de 2026 (Ecuador, UTC-5). Las marcas de herramientas y del CSV pueden corresponder al 14 de noviembre en UTC. Investigadora responsable: **Villacres Martinez Nayda Antonela**. Tema exclusivo: apartado 3, REST HTTP/1.1 frente a gRPC HTTP/2 bajo concurrencia.
 
 ## Roles y alcance real
 
-Codex ejecutó comandos en el entorno local de Windows, escribió y auditó el benchmark, consultó fuentes bibliográficas, ejecutó las pruebas y elaboró el artículo Quarto. OpenCode 2.2.7 se utilizó realmente mediante terminal, incluyendo una invocación desde CMD, como asistente de revisión metodológica, código y maquetación. No se afirma que OpenCode haya producido por sí solo el proyecto. La autora todavía debe revisar y aceptar código, interpretación y documento. No se firma una declaración en su nombre.
+El asistente adicional de IA ejecutó comandos en el entorno local de Windows, escribió y auditó el benchmark, consultó fuentes bibliográficas, ejecutó las pruebas y elaboró el artículo Quarto. OpenCode 2.2.7 se utilizó realmente mediante terminal, incluyendo una invocación desde CMD, como asistente de revisión metodológica, código y maquetación. No se afirma que OpenCode haya producido por sí solo el proyecto. La autora todavía debe revisar y aceptar código, interpretación y documento. No se firma una declaración en su nombre.
 
 ## Consultas principales realmente enviadas
 
@@ -72,7 +76,7 @@ Codex ejecutó comandos en el entorno local de Windows, escribió y auditó el b
 
    OpenCode creó un esqueleto con el bucle y `asyncio.gather`, pese a solicitar respuesta sin herramientas. Se revisó y trasladó al directorio de trabajo para no añadir un noveno archivo al repositorio. Su `psutil.Process()` apuntaba al proceso actual; el benchmark entregado conserva `psutil.Process(pid)` del servidor, usa deadline coherente y añade verificación, calentamiento, errores, cierre de recursos y mediciones por repetición. El esqueleto no se ejecutó como experimento.
 
-## Decisiones y correcciones aplicadas por Codex
+## Decisiones y correcciones aplicadas por el asistente adicional de IA
 
 - Se mantuvo exclusivamente el tema asignado. No se generaron actividades de otros estudiantes.
 - Dos servicios reales con igual semántica de texto; no se simuló una ventaja para ningún protocolo.
@@ -81,7 +85,7 @@ Codex ejecutó comandos en el entorno local de Windows, escribió y auditó el b
 - RSS total del servidor muestreada, CPU por diferencias de contadores y percentiles de llamadas verificadas; no se confundió RSS con memoria incremental.
 - La gráfica de Quarto lee `results.csv`; ningún número ilustrativo de IA se usa como dato experimental.
 - Se corrigió la ficha de Grigorik por Crossref: *ACM Queue* 11(10), 40–53, DOI 10.1145/2542661.2555617. Se verificaron las cinco referencias con fuentes bibliográficas; no se inventaron autores ni DOI.
-- Las recomendaciones del agente fueron sometidas a auditoría técnica por otro agente (Codex). Esto **no equivale a la supervisión humana pendiente**.
+- Las recomendaciones del agente fueron sometidas a auditoría técnica por otro agente (el asistente adicional de IA). Esto **no equivale a la supervisión humana pendiente**.
 
 ## Pruebas e incidente experimental
 
@@ -99,7 +103,7 @@ Se retiró el requisito inicial de cero errores del análisis, manteniendo la va
 
 ## Declaración de integridad y revisión pendiente
 
-### Verificación técnica final realizada por Codex
+### Verificación técnica final realizada por el asistente adicional de IA
 
 - `python -m py_compile outputs/benchmark.py`: completado correctamente.
 - CSV: 80 filas, cinco repeticiones por combinación y orden único. Se comprobaron `rps = requests/elapsed_s`, orden p50 <= p95 <= p99, media RSS <= máximo RSS y suma de `error_types` igual a `errors`.
@@ -109,7 +113,7 @@ Se retiró el requisito inicial de cero errores del análisis, manteniendo la va
 - Se corrigió un fallo de `longtable` en dos columnas generando una tabla LaTeX `tabular` desde los mismos datos. Se corrigió también una figura demasiado ancha, que ahora ocupa una columna. Se renderizaron las tres páginas finales con Poppler y se inspeccionaron visualmente: texto, figura, tabla, citas y cinco referencias legibles, sin superposición.
 - Se inicializó Git localmente. El contenido de entrega se limita a los ocho archivos solicitados; los registros y archivos auxiliares se mantienen fuera de esa carpeta. No se ha publicado un repositorio remoto ni creado una URL pública.
 
-Los datos del CSV entregado proceden de llamadas locales reales, no de valores inventados. Se declara asistencia sustancial de Codex en programación, experimentación, redacción y revisión, y asistencia de OpenCode en propuestas de código y maquetación. Las fuentes y sugerencias de IA se comprobaron y se rechazaron errores concretos, incluidos números ilustrativos y una asociación bibliográfica falsa.
+Los datos del CSV entregado proceden de llamadas locales reales, no de valores inventados. Se declara asistencia sustancial del asistente adicional de IA en programación, experimentación, redacción y revisión, y asistencia de OpenCode en propuestas de código y maquetación. Las fuentes y sugerencias de IA se comprobaron y se rechazaron errores concretos, incluidos números ilustrativos y una asociación bibliográfica falsa.
 
 **Estado al finalizar la preparación local:** estaba pendiente la revisión de la investigadora. La responsabilidad académica corresponde a la autora y debe respetarse la política de su institución. Véase la confirmación posterior registrada al final de esta bitácora.
 
@@ -117,7 +121,7 @@ Al cerrar la preparación local, la publicación pública y la entrega en Moodle
 
 ## Actualización posterior: publicación autorizada
 
-La usuaria solicitó expresamente publicar los ocho archivos y proporcionó su cuenta `Nayda-villacres`. Tras resolver dificultades del control de ventanas, Codex accedió a su sesión de GitHub en Chrome y creó el repositorio público [investigacion-sistemas-distribuidos-u2](https://github.com/Nayda-villacres/investigacion-sistemas-distribuidos-u2). Se preparó la carga de los ocho archivos sin credenciales ni registros internos. La autorización de publicación no se interpreta como una revisión académica ya realizada. No se efectuó una entrega en Moodle.
+La usuaria solicitó expresamente publicar los ocho archivos y proporcionó su cuenta `Nayda-villacres`. Tras resolver dificultades del control de ventanas, el orquestador de automatización accedió a su sesión de GitHub en Chrome y creó el repositorio público [investigacion-sistemas-distribuidos-u2](https://github.com/Nayda-villacres/investigacion-sistemas-distribuidos-u2). Se preparó la carga de los ocho archivos sin credenciales ni registros internos. La autorización de publicación no se interpreta como una revisión académica ya realizada. No se efectuó una entrega en Moodle.
 
 Los ocho archivos se publicaron y se verificó su acceso mediante la API pública de GitHub sin autenticación. Sus identificadores de contenido coincidieron con los ocho archivos locales.
 
@@ -125,11 +129,11 @@ Los ocho archivos se publicaron y se verificó su acceso mediante la API públic
 
 Después de la publicación, la autora comunicó en el chat: «Ya lo revise», y solicitó presentar los archivos en el orden de la guía. Se registra su confirmación de revisión, sin atribuirle observaciones concretas, cambios de análisis o una auditoría línea por línea no descritos. El README incorpora la estructura en el orden solicitado; la lista nativa de GitHub conserva su orden automático por nombre. El PDF es el compilado anterior a esta confirmación y no se modificaron los resultados experimentales.
 
-También se confirmó que OpenCode fue ejecutado desde su instalación local de Windows: `opencode v2.2.7`, localizado por PowerShell en `C:\Users\Nani\AppData\Roaming\npm\opencode.ps1`. Codex realizó gran parte de la programación, experimentación y redacción; OpenCode aportó las consultas y respuestas documentadas, incluidas propuestas corregidas. No se atribuye todo el trabajo exclusivamente a OpenCode.
+También se confirmó que OpenCode fue ejecutado desde su instalación local de Windows: `opencode v2.2.7`, localizado por PowerShell en `C:\Users\Nani\AppData\Roaming\npm\opencode.ps1`. El asistente adicional de IA realizó gran parte de la programación, experimentación y redacción; OpenCode aportó las consultas y respuestas documentadas, incluidas propuestas corregidas. No se atribuye todo el trabajo exclusivamente a OpenCode.
 
 ## Auditoría asistida solicitada por la investigadora
 
-La autora pidió a Codex explicar `benchmark.py` por secciones y líneas, volver a ejecutar el experimento, revisar unidades y comparabilidad, interpretar los resultados y documentar las intervenciones. Esta sección registra la revisión técnica hecha por Codex para ayudar a la autora. Las observaciones siguientes no se presentan como palabras, conclusiones personales o aprobaciones específicas de la investigadora.
+La autora pidió al asistente adicional de IA explicar `benchmark.py` por secciones y líneas, volver a ejecutar el experimento, revisar unidades y comparabilidad, interpretar los resultados y documentar las intervenciones. Esta sección registra la revisión técnica hecha por el asistente adicional de IA para ayudar a la autora. Las observaciones siguientes no se presentan como palabras, conclusiones personales o aprobaciones específicas de la investigadora.
 
 ### Paso 1. Lectura del código por líneas
 
@@ -292,12 +296,12 @@ Posibles explicaciones, **no causas demostradas**: gestión de llamadas y flujos
 ### Paso 4. Registro de intervenciones y límites de autoría
 
 - **Solicitado por la autora:** explicación por líneas, nueva ejecución, verificación de métricas/comparabilidad, ayuda interpretativa y registro honesto de intervenciones. Los prompts reales anteriores a OpenCode permanecen en esta misma bitácora; no se enviaron nuevos prompts a OpenCode durante la batería de validación.
-- **Realizado por Codex:** revisión del archivo de 124 líneas, contraste de fórmulas y documentación primaria, comprobación de tamaños serializados/reloj, ejecución de 48 ensayos nuevos y verificación de ambas capturas. No se modificó `benchmark.py` ni `results.csv`.
+- **Realizado por el asistente adicional de IA:** revisión del archivo de 124 líneas, contraste de fórmulas y documentación primaria, comprobación de tamaños serializados/reloj, ejecución de 48 ensayos nuevos y verificación de ambas capturas. No se modificó `benchmark.py` ni `results.csv`.
 - **Problemas identificados:** validaciones que desaparecen con `python -O`, sobrescritura por defecto del CSV, dependencia de un atributo privado aiohttp, validación incompleta de parámetros no finitos, ausencia de watchdog y trazas individuales, confusores de códec/conexión, muestreo no uniforme y sensibilidad de latencia entre series. La importación `Path` no utilizada es una limpieza pendiente, no un defecto de medición.
 - **Correcciones realizadas en esta intervención:** documentación de unidades, controles, límites y nueva evidencia en esta bitácora. La captura nueva se guardó por separado; no se sustituyeron filas del artículo para favorecer una conclusión. Las correcciones de código de etapas anteriores siguen documentadas en las secciones precedentes.
 - **Intervención humana efectivamente comunicada:** la autora había indicado «Ya lo revise» y ahora solicitó esta revisión guiada. No se afirma que haya escrito personalmente este análisis ni aprobado cada hallazgo técnico. Se le solicitó expresar si acepta la conclusión limitada al microbenchmark o desea matizarla; su respuesta específica debe registrarse cuando exista.
 
-La conclusión propuesta es: «REST rindió mejor en este microbenchmark local, pero los confusores y la variación impiden generalizar a todas las redes y aplicaciones». Es una propuesta técnica de Codex que la autora debe valorar con su propio juicio; no se presenta como una declaración suya antes de recibir su respuesta.
+La conclusión propuesta es: «REST rindió mejor en este microbenchmark local, pero los confusores y la variación impiden generalizar a todas las redes y aplicaciones». Es una propuesta técnica del asistente adicional de IA que la autora debe valorar con su propio juicio; no se presenta como una declaración suya antes de recibir su respuesta.
 
 ### Valoración personal comunicada por la investigadora
 
@@ -382,24 +386,11 @@ Esta sección registra una intervención real y posterior a las secciones anteri
 
 ### Solicitud recibida
 
-La autora encargó a OpenCode, ejecutado localmente en Windows, la revisión final del proyecto. El texto completo de la solicitud se conserva fuera de `outputs` en `work/prompt-revision-final-opencode.txt` y se transcribe aquí de forma fiel:
+La autora encargó a OpenCode, ejecutado localmente en Windows, la revisión final del proyecto. El texto completo de la solicitud se conserva fuera de `outputs` en `work/prompt-revision-final-opencode.txt`; la transcripción literal original (que contenía la denominación comercial retirada) se conserva en la versión histórica enlazada abajo, y aquí se ofrece una síntesis:
 
-```text
-Eres OpenCode, ejecutado localmente en Windows, y la autora te encarga la revision final de su proyecto. Realiza tu mismo la revision y las correcciones documentales necesarias usando tus herramientas. No delegues en otros agentes. Responde en espanol.
+Síntesis identificada (no transcripción literal). El bloque original contenía la denominación comercial del asistente adicional (retirada) en las restricciones 3 y 4. Su transcripción literal se conserva en la versión histórica: https://github.com/Nayda-villacres/investigacion-sistemas-distribuidos-u2/blob/1209b6158ed622f0c2b3b5e2798ec51710516f9a/PROMPTS_OPENCODE.md (sección "## Revisión final realizada por OpenCode" -> "### Solicitud recibida", bloque text).
 
-Alcance: revisa todos los archivos de la carpeta outputs y los registros previos work/opencode-*.jsonl cuando sean necesarios para comprobar atribuciones. El tema sigue siendo REST HTTP/1.1 frente a gRPC HTTP/2 bajo concurrencia, autora Villacres Martinez Nayda Antonela.
-
-Restricciones estrictas:
-1. NO modifiques benchmark.py, results.csv, articulo.qmd, articulo.pdf, references.bib ni _quarto.yml. No ejecutes el benchmark, no renderices el PDF, no cambies resultados, conclusiones, cifras ni limitaciones. Esos seis archivos estan validados y deben conservar exactamente sus bytes.
-2. Solo puedes modificar outputs/README.md y outputs/PROMPTS_OPENCODE.md, si es necesario. No crees un noveno archivo en outputs. No modifiques ni borres registros previos de work. No publiques en GitHub ni ejecutes git commit; eso es una operacion mecanica posterior del orquestador.
-3. OpenCode es el asistente oficial designado por la autora PARA ESTA REVISION FINAL y las actividades pendientes. No afirmes que fue la unica IA utilizada en todo el desarrollo historico: los registros acreditan intervencion previa de Codex. Conserva de manera integra el historial existente de prompts, atribuciones reales e intervenciones humanas. No conviertas acciones previas de Codex en acciones de OpenCode ni ocultes esa procedencia.
-4. El articulo y el README ya describen los aportes reales de OpenCode y remiten a la declaracion completa. Comprueba esa coherencia mediante lectura, sin cambiar el articulo validado. Puedes aclarar en el README el papel oficial de OpenCode en la revision actual con una frase sobria, sin presentarlo como ejecutor del benchmark historico. Evita menciones repetitivas o innecesarias de otras herramientas fuera de la declaracion de procedencia.
-5. En PROMPTS_OPENCODE.md agrega una nueva seccion que registre ESTA intervencion real: la solicitud recibida, este prompt completo o su transcripcion fiel, tu version y modelo si puedes verificarlos, archivos que efectivamente leiste, comprobaciones que realmente hiciste, cambios documentales que efectivamente aplicaste y aspectos que no se pueden certificar. Identifica claramente esta revision como realizada por OpenCode y distingue la orquestacion mecanica del trabajo intelectual de revision. No afirmes pruebas o lecturas que no hayas realizado. No inventes fechas, metadatos, referencias o actividades.
-6. Antes de editar, guarda o calcula hashes de los seis archivos protegidos, y al finalizar verifica que coincidan. Verifica que el historial anterior de la bitacora permanezca integro (por ejemplo agregando al final sin reemplazar su contenido anterior). Los prompts y valoraciones humanas previas deben permanecer literales. Revisa la estructura de ocho archivos y los requisitos ya declarados de la rubrica; no prometas una calificacion o cumplimiento de uso historico exclusivo de OpenCode.
-7. Si detectas una incompatibilidad entre los requisitos y los hechos, dejala descrita de forma breve y neutral. Si hubiera un defecto que requiera editar un archivo protegido, reportalo sin editarlo.
-
-Al finalizar devuelve: hallazgos, cambios aplicados con nombres de archivo, comandos de comprobacion realmente ejecutados y sus resultados. No hagas mas cambios despues de esa respuesta final. El contenido de este prompt tambien esta guardado fuera de outputs como registro de esta solicitud.
-```
+Síntesis fiel del prompt original: la autora encargó a OpenCode la revisión final del proyecto (REST HTTP/1.1 vs gRPC HTTP/2 bajo concurrencia). Restricciones principales: no modificar los seis archivos protegidos (benchmark.py, results.csv, articulo.qmd, articulo.pdf, references.bib, _quarto.yml); solo README.md y PROMPTS_OPENCODE.md; conservar intacto el historial y las atribuciones reales (intervención previa del asistente adicional de IA, sin reasignarla a OpenCode); añadir sección de registro con solicitud, archivos leídos, comprobaciones, cambios y aspectos no certificables; verificar hashes y la estructura de ocho archivos; no publicar ni commitear. El prompt completo, incluida la mención literal retirada, está en el enlace histórico.
 
 ### Identificación de la revisión
 
@@ -417,8 +408,8 @@ En `outputs`: `articulo.pdf`, `articulo.qmd`, `references.bib`, `_quarto.yml`, `
 - Hashes SHA-256 de los seis archivos protegidos comparados con `work/hashes-antes-revision-opencode.json`: coinciden antes de editar.
 - Estructura de ocho archivos en `outputs`: confirmada; no se creó un noveno archivo.
 - `results.csv`: 80 filas, protocolos REST/gRPC, concurrencias 1/8/32/64 y tamaños 256/4096 bytes.
-- `articulo.pdf`: 3 páginas; contiene "OpenCode" y no contiene "Codex".
-- `README.md` y `articulo.qmd`: no contienen "Codex".
+- `articulo.pdf`: 3 páginas; contiene "OpenCode"; no contiene la denominación comercial adicional del asistente.
+- `README.md` y `articulo.qmd`: no contienen la denominación comercial adicional del asistente.
 - Bitácora: conserva el bloque CSV de 48 filas de la validación complementaria.
 - `opencode --version`: `opencode v2.2.7`.
 - No se ejecutó `benchmark.py`, no se renderizó el PDF y no se modificaron datos, conclusiones, cifras ni limitaciones.
@@ -431,7 +422,7 @@ En `outputs`: `articulo.pdf`, `articulo.qmd`, `references.bib`, `_quarto.yml`, `
 ### Aspectos que no se pueden certificar
 
 - No se puede certificar de forma independiente el origen histórico de cada byte ni recuperar el CSV perdido de la primera batería.
-- Los registros acreditan intervención previa de Codex; no se afirma que OpenCode haya sido la única herramienta utilizada en todo el desarrollo.
+- Los registros acreditan intervención previa del asistente adicional de IA; no se afirma que OpenCode haya sido la única herramienta utilizada en todo el desarrollo.
 - La validación complementaria de 48 ejecuciones es previa y documentada; no se repitió en esta revisión.
 - No se puede certificar una calificación, ni el cumplimiento de un uso histórico exclusivo de OpenCode.
 - El registro `work/opencode-revision-final.jsonl` contiene llamadas a herramientas pero no una respuesta textual final utilizable; por eso no se usó como prueba de una auditoría concluida.
@@ -439,3 +430,37 @@ En `outputs`: `articulo.pdf`, `articulo.qmd`, `references.bib`, `_quarto.yml`, `
 ## Aclaración posterior sobre el cierre del registro
 
 Tras finalizar la revisión anterior, `work/opencode-revision-final.jsonl` contiene un evento `text` final y un `step_finish` con motivo `stop`. Por tanto, la observación anterior sobre la ausencia de una respuesta textual final utilizable quedó superada y no debe leerse como indicación de que faltara una auditoría final una vez concluida la revisión. Esta aclaración se añade al final por una indicación técnica del orquestador dentro del alcance autorizado por la autora, sin reescribir el historial previo ni modificar otros archivos.
+
+## Ajuste editorial puntual
+
+Se recibió la solicitud de retirar el párrafo introductorio que comenzaba con **Declaración complementaria de asistencia:**. El ajuste se realizó por OpenCode y se limitó a eliminar únicamente ese párrafo. Se conservó literalmente el resto del contenido, incluidos los registros históricos y las atribuciones reales de las herramientas. No se modificó ningún otro archivo de outputs.
+
+
+## Ajuste editorial de presentación funcional
+
+### Solicitud recibida (resumen fiel)
+
+La autora solicitó retirar de la versión actual de los ocho archivos del proyecto la denominación comercial del asistente adicional de IA, manteniendo OpenCode como asistente oficial de la guía; realizar el ajuste de forma verídica; no modificar datos, mediciones, conclusiones, limitaciones, resultados ni código; solo editar outputs/PROMPTS_OPENCODE.md; no publicar ni commitear. El nombre a retirar es el de la denominación comercial del asistente adicional. Sustituir referencias narrativas por una descripción explícita según la función documentada (asistente adicional de IA / orquestador de automatización). Conservar los hechos: hubo asistencia adicional en implementación, ejecución, redacción y auditoría; no atribuir esas actividades históricas a OpenCode ni afirmar uso exclusivo histórico de OpenCode. No alterar silenciosamente los prompts citados: si un bloque literal contiene el nombre a retirar, sustituir el bloque completo por una síntesis identificada y enlazar su transcripción literal en la versión Git anterior (commit 1209b6158ed622f0c2b3b5e2798ec51710516f9a). No cambiar citas humanas. No reescribir el historial Git ni eliminar registros de work. Conservar la copia original en work antes de modificar. Añadir nota editorial transparente. Registrar la intervención y un resumen fiel de la solicitud, sin reintroducir la denominación comercial retirada. Conservar la captura CSV de 48 filas y las interpretaciones humanas. No inventar actividades ni fechas. Verificar: ausencia de la denominación en los ocho archivos (extrayendo texto del PDF), ocho archivos presentes, siete archivos ajenos a la bitácora con hash conservado, 80 filas y captura complementaria de 48 filas sin cambios.
+
+### Intervención realizada
+
+Realizada por OpenCode, ejecutado localmente en Windows. Se sustituyeron las referencias narrativas a la denominación comercial por "asistente adicional de IA" o "orquestador de automatización" según la función documentada; se sustituyó el bloque literal del prompt de revisión final (que contenía la denominación comercial) por una síntesis identificada, enlazando la transcripción literal en la versión histórica; se añadió la nota editorial transparente; se registró esta intervención. No se modificaron datos, mediciones, conclusiones, limitaciones, resultados ni código. La captura CSV de 48 filas y las interpretaciones humanas se conservaron. No se reescribió el historial Git ni se eliminaron registros de work; la copia original se conserva en work/PROMPTS_OPENCODE-original-pre-presentacion.md. OpenCode se presenta como asistente oficial de la revisión y de la guía, sin ocultar la asistencia adicional real.
+
+### Verificación
+
+Comprobaciones realmente ejecutadas:
+- Búsqueda de la denominación comercial en los ocho archivos de outputs, incluyendo extracción de texto del PDF con PyMuPDF: 0 ocurrencias en los ocho archivos. PDF: 3 páginas, contiene "OpenCode", no contiene la denominación comercial.
+- Estructura de outputs: 8 archivos presentes; no se creó un noveno archivo.
+- Hashes SHA-256 de los siete archivos ajenos a la bitácora (articulo.qmd, articulo.pdf, README.md, benchmark.py, results.csv, references.bib, _quarto.yml) comparados con los valores registrados antes de esta intervención: todos coinciden (sin cambios).
+- results.csv: 80 filas de datos (5 repeticiones × 4 concurrencias × 2 tamaños × 2 protocolos); hash sin cambios (576d58e4c44faa535d75766fe3b475a9934c77770745757d637832b0005b0a30).
+- Bitácora: captura complementaria de 48 filas conservada completa (verificación con csv.DictReader: 48 filas).
+- No se ejecutó benchmark.py, no se renderizó el PDF, no se modificaron datos, mediciones, conclusiones, limitaciones ni código.
+- La copia original se conserva en work/PROMPTS_OPENCODE-original-pre-presentacion.md. El historial Git no se reescribió ni se eliminaron registros de work.
+
+## Ajuste de denominaciones realizado por OpenCode
+
+OpenCode realizó este ajuste de nombres en `outputs/PROMPTS_OPENCODE.md`: la denominación comercial del asistente adicional se sustituyó por "asistente adicional de IA" o el rol real correspondiente (implementación, ejecución, redacción, auditoría, orquestación). Los hechos y las acciones del asistente adicional se conservan; no se atribuyen a OpenCode ni se afirma uso exclusivo de OpenCode.
+
+Los prompts citados se presentan con nombres editados. Sus textos literales originales, con la denominación comercial, están disponibles en la versión histórica pública: https://github.com/Nayda-villacres/investigacion-sistemas-distribuidos-u2/blob/1209b6158ed622f0c2b3b5e2798ec51710516f9a/PROMPTS_OPENCODE.md . También se conservan en los registros locales de `work/` y en el historial de Git (commit local no publicado).
+
+Resumen fiel de la solicitud atendida: continuar el ajuste editorial anterior no terminado; modificar solo `outputs/PROMPTS_OPENCODE.md`; conservar los otros siete archivos; eliminar la denominación comercial de la versión actual sustituyéndola por "asistente adicional de IA" o el rol real; no eliminar hechos ni atribuir acciones a OpenCode; no afirmar uso exclusivo de OpenCode; agregar antes del historial una nota editorial sobre denominaciones funcionales y enlace a la versión histórica pública; conservar registros originales de work y Git y copia previa en work; no alterar citas personales ni bloques CSV; registrar al final que OpenCode realizó el ajuste y dónde están los originales; verificar ausencia del término y conservación de los otros siete archivos; no ejecutar benchmark, Quarto, git commit ni publicar.
