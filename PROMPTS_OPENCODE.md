@@ -1,4 +1,26 @@
-# Bitácora de OpenCode, Codex e integridad académica
+# Bitácora de OpenCode e integridad académica
+
+## Alcance de OpenCode y declaración de herramientas
+
+OpenCode 2.2.7, instalado en la computadora de la autora y utilizado desde la terminal de Windows, fue el copiloto consultado para propuestas de código Python, revisión del diseño experimental, bloques Quarto con `label` y `fig-cap`, y formato BibTeX. Las consultas históricas y sus respuestas se conservan más abajo, incluidas sugerencias descartadas o corregidas. No se atribuye a esas consultas la ejecución de los benchmarks.
+
+**Declaración complementaria de asistencia:** también se utilizó Codex para implementar y auditar el código, ejecutar comandos y experimentos, comprobar referencias, redactar y compilar el documento, y publicar los archivos. Esta participación ocurrió y se mantiene declarada para que la documentación no sugiera un uso exclusivo de OpenCode. La identificación de funciones de cada herramienta es una declaración de procedencia, no una atribución a OpenCode de actividades ajenas. La autora aportó la revisión declarada y las valoraciones personales registradas.
+
+### Verificación previa al ajuste documental
+
+Antes de esta revisión se cotejaron los registros locales JSONL de OpenCode y las acciones de esta sesión. Se identificaron cinco consultas con respuestas sustantivas, una consulta inicial fallida por autenticación, una revisión de archivos sin una auditoría final utilizable y su intento de continuación sin respuesta utilizable. Las respuestas verificadas respaldan únicamente los aportes indicados en la tabla.
+
+| Registro local | Aporte efectivamente observado | Límite o corrección |
+|---|---|---|
+| `opencode-directo.jsonl` | Auditoría del diseño y propuestas de integración de CSV/Quarto. | Varias advertencias eran hipotéticas y no describían fallos presentes en el script. |
+| `opencode-standalone.jsonl` | Limitaciones metodológicas, configuración IEEEtran y bloque Quarto basado en CSV. | Se adaptaron nombres de columnas y controles al proyecto real. |
+| `opencode-beam.jsonl` | Ejemplo de figura con `label` y `fig-cap`. | Se descartaron cifras ilustrativas y afirmaciones técnicas incorrectas. |
+| `opencode-codigo.jsonl` | Propuesta de esqueleto y ejemplo BibTeX. | Interpretó C como lenguaje C y asoció un DOI al artículo equivocado; no se adoptaron esos errores. |
+| `opencode-correccion.jsonl` | Creación de un esqueleto de corutinas tras aclarar el significado de C. | Se corrigió la selección del proceso para CPU; el esqueleto no produjo las mediciones publicadas. |
+
+Se conserva el historial de prompts, incidencias, atribuciones y respuestas humanas que sigue. La revisión documental concentra la explicación de OpenCode en el artículo y el README y remite aquí a la declaración completa; no elimina una herramienta efectivamente utilizada ni modifica retrospectivamente la autoría de las acciones. No se ejecutaron nuevos prompts a OpenCode para atribuirlos a etapas anteriores. Los datos, el benchmark, la bibliografía científica, las conclusiones y las limitaciones del experimento se mantienen.
+
+## Historial de desarrollo y revisión
 
 Fecha local: 13 de noviembre de 2026 (Ecuador, UTC-5). Las marcas de herramientas y del CSV pueden corresponder al 14 de noviembre en UTC. Investigadora responsable: **Villacres Martinez Nayda Antonela**. Tema exclusivo: apartado 3, REST HTTP/1.1 frente a gRPC HTTP/2 bajo concurrencia.
 
