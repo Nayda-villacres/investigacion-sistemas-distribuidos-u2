@@ -375,3 +375,67 @@ timestamp_utc,order,protocol,concurrency,payload_bytes,repeat,seed,warmup_s,targ
 2026-11-14T03:04:46.223373+00:00,47,gRPC,64,4096,1,20261114,0.5,2.0,2886,0,{},2.0469305999868084,1409.9159004309179,44.84689237699238,44.9689,48.694824999999994,50.31854,2.6875,131.29414353458392,931.2196812196812,51.72378077651515,51.828125,132,1.578125,3.12.3,Windows-11-10.0.26200-SP0,"AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",16,15.34320068359375,3.14.5,1.85.1,7.2.2
 2026-11-14T03:04:49.553594+00:00,48,REST,8,256,1,20261114,0.5,2.0,7252,0,{},2.0012912999955006,3623.6603836814284,2.2051670987313843,2.01835,3.040444999999999,3.635698,1.65625,82.7590666088302,228.38527302813017,48.06640625,48.06640625,129,1.984375,3.12.3,Windows-11-10.0.26200-SP0,"AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",16,15.34320068359375,3.14.5,1.85.1,7.2.2
 ```
+
+## Revisión final realizada por OpenCode
+
+Esta sección registra una intervención real y posterior a las secciones anteriores. No sustituye ni reescribe el historial previo: se añade al final del archivo para conservar intactos los prompts, atribuciones e intervenciones humanas ya documentados.
+
+### Solicitud recibida
+
+La autora encargó a OpenCode, ejecutado localmente en Windows, la revisión final del proyecto. El texto completo de la solicitud se conserva fuera de `outputs` en `work/prompt-revision-final-opencode.txt` y se transcribe aquí de forma fiel:
+
+```text
+Eres OpenCode, ejecutado localmente en Windows, y la autora te encarga la revision final de su proyecto. Realiza tu mismo la revision y las correcciones documentales necesarias usando tus herramientas. No delegues en otros agentes. Responde en espanol.
+
+Alcance: revisa todos los archivos de la carpeta outputs y los registros previos work/opencode-*.jsonl cuando sean necesarios para comprobar atribuciones. El tema sigue siendo REST HTTP/1.1 frente a gRPC HTTP/2 bajo concurrencia, autora Villacres Martinez Nayda Antonela.
+
+Restricciones estrictas:
+1. NO modifiques benchmark.py, results.csv, articulo.qmd, articulo.pdf, references.bib ni _quarto.yml. No ejecutes el benchmark, no renderices el PDF, no cambies resultados, conclusiones, cifras ni limitaciones. Esos seis archivos estan validados y deben conservar exactamente sus bytes.
+2. Solo puedes modificar outputs/README.md y outputs/PROMPTS_OPENCODE.md, si es necesario. No crees un noveno archivo en outputs. No modifiques ni borres registros previos de work. No publiques en GitHub ni ejecutes git commit; eso es una operacion mecanica posterior del orquestador.
+3. OpenCode es el asistente oficial designado por la autora PARA ESTA REVISION FINAL y las actividades pendientes. No afirmes que fue la unica IA utilizada en todo el desarrollo historico: los registros acreditan intervencion previa de Codex. Conserva de manera integra el historial existente de prompts, atribuciones reales e intervenciones humanas. No conviertas acciones previas de Codex en acciones de OpenCode ni ocultes esa procedencia.
+4. El articulo y el README ya describen los aportes reales de OpenCode y remiten a la declaracion completa. Comprueba esa coherencia mediante lectura, sin cambiar el articulo validado. Puedes aclarar en el README el papel oficial de OpenCode en la revision actual con una frase sobria, sin presentarlo como ejecutor del benchmark historico. Evita menciones repetitivas o innecesarias de otras herramientas fuera de la declaracion de procedencia.
+5. En PROMPTS_OPENCODE.md agrega una nueva seccion que registre ESTA intervencion real: la solicitud recibida, este prompt completo o su transcripcion fiel, tu version y modelo si puedes verificarlos, archivos que efectivamente leiste, comprobaciones que realmente hiciste, cambios documentales que efectivamente aplicaste y aspectos que no se pueden certificar. Identifica claramente esta revision como realizada por OpenCode y distingue la orquestacion mecanica del trabajo intelectual de revision. No afirmes pruebas o lecturas que no hayas realizado. No inventes fechas, metadatos, referencias o actividades.
+6. Antes de editar, guarda o calcula hashes de los seis archivos protegidos, y al finalizar verifica que coincidan. Verifica que el historial anterior de la bitacora permanezca integro (por ejemplo agregando al final sin reemplazar su contenido anterior). Los prompts y valoraciones humanas previas deben permanecer literales. Revisa la estructura de ocho archivos y los requisitos ya declarados de la rubrica; no prometas una calificacion o cumplimiento de uso historico exclusivo de OpenCode.
+7. Si detectas una incompatibilidad entre los requisitos y los hechos, dejala descrita de forma breve y neutral. Si hubiera un defecto que requiera editar un archivo protegido, reportalo sin editarlo.
+
+Al finalizar devuelve: hallazgos, cambios aplicados con nombres de archivo, comandos de comprobacion realmente ejecutados y sus resultados. No hagas mas cambios despues de esa respuesta final. El contenido de este prompt tambien esta guardado fuera de outputs como registro de esta solicitud.
+```
+
+### Identificación de la revisión
+
+- Realizada por: OpenCode, asistente oficial designado por la autora para esta revisión final.
+- Versión verificada por comando: `opencode v2.2.7`.
+- Modelo: el entorno de esta sesión lo identifica como Beam Free (proveedor OpenCode). No se verificó por comando un identificador más específico; no se afirma otro.
+- Orquestación mecánica (publicación, commits o mover archivos) no se ejecutó aquí; corresponde al orquestador posterior. El trabajo intelectual de esta revisión consistió en leer, contrastar, documentar e indicar límites, sin ejecutar el benchmark ni renderizar el PDF.
+
+### Archivos efectivamente leídos
+
+En `outputs`: `articulo.pdf`, `articulo.qmd`, `references.bib`, `_quarto.yml`, `benchmark.py`, `results.csv`, `README.md` y `PROMPTS_OPENCODE.md`. En `work`: `prompt-revision-final-opencode.txt`, los registros `work/opencode-*.jsonl` procesados mediante `work/verificar-atribuciones.py`, inspección directa inicial de `work/opencode-revision-final.jsonl` y los scripts `work/verificar-atribuciones.py`, `work/verificar-bitacora.py`, `work/verificar-contenido-articulo.py`, `work/verificar-ajuste-documental.py` y `work/verify-publication.py`. También se leyeron `work/hashes-antes-revision-opencode.json`.
+
+### Comprobaciones realmente realizadas
+
+- Hashes SHA-256 de los seis archivos protegidos comparados con `work/hashes-antes-revision-opencode.json`: coinciden antes de editar.
+- Estructura de ocho archivos en `outputs`: confirmada; no se creó un noveno archivo.
+- `results.csv`: 80 filas, protocolos REST/gRPC, concurrencias 1/8/32/64 y tamaños 256/4096 bytes.
+- `articulo.pdf`: 3 páginas; contiene "OpenCode" y no contiene "Codex".
+- `README.md` y `articulo.qmd`: no contienen "Codex".
+- Bitácora: conserva el bloque CSV de 48 filas de la validación complementaria.
+- `opencode --version`: `opencode v2.2.7`.
+- No se ejecutó `benchmark.py`, no se renderizó el PDF y no se modificaron datos, conclusiones, cifras ni limitaciones.
+
+### Cambios documentales aplicados en esta revisión
+
+- `outputs/README.md`: se añadió una frase sobria que aclara el papel oficial de OpenCode en esta revisión final y que la revisión documental no ejecuta el benchmark ni modifica los datos validados.
+- `outputs/PROMPTS_OPENCODE.md`: se añadió esta sección al final, conservando íntegro el historial anterior.
+
+### Aspectos que no se pueden certificar
+
+- No se puede certificar de forma independiente el origen histórico de cada byte ni recuperar el CSV perdido de la primera batería.
+- Los registros acreditan intervención previa de Codex; no se afirma que OpenCode haya sido la única herramienta utilizada en todo el desarrollo.
+- La validación complementaria de 48 ejecuciones es previa y documentada; no se repitió en esta revisión.
+- No se puede certificar una calificación, ni el cumplimiento de un uso histórico exclusivo de OpenCode.
+- El registro `work/opencode-revision-final.jsonl` contiene llamadas a herramientas pero no una respuesta textual final utilizable; por eso no se usó como prueba de una auditoría concluida.
+
+## Aclaración posterior sobre el cierre del registro
+
+Tras finalizar la revisión anterior, `work/opencode-revision-final.jsonl` contiene un evento `text` final y un `step_finish` con motivo `stop`. Por tanto, la observación anterior sobre la ausencia de una respuesta textual final utilizable quedó superada y no debe leerse como indicación de que faltara una auditoría final una vez concluida la revisión. Esta aclaración se añade al final por una indicación técnica del orquestador dentro del alcance autorizado por la autora, sin reescribir el historial previo ni modificar otros archivos.
