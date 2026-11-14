@@ -1,6 +1,6 @@
 # Investigación formativa individual · Tema 3
 
-**Autora e investigadora responsable:** Villacres Martinez Nayda Antonela.  
+**Autora:** Villacres Martinez Nayda Antonela.  
 **Asignatura:** Sistemas Distribuidos y Paradigmas de la Computación (ETL1TP50).  
 **Carrera:** Ingeniería en Telemática, Octavo PAO.  
 **Unidad 2:** Comunicación y Coordinación en Sistemas Distribuidos.  
