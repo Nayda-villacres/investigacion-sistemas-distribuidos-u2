@@ -1,0 +1,23 @@
+project:
+  type: default
+  render: [articulo.qmd]
+format:
+  pdf:
+    documentclass: IEEEtran
+    classoption: [conference]
+    fontfamily: times
+    fontsize: 10pt
+    pdf-engine: pdflatex
+    cite-method: natbib
+    biblio-style: IEEEtran
+    natbiboptions: [numbers]
+    number-sections: true
+    keep-tex: false
+    fig-pos: tb
+bibliography: references.bib
+jupyter: python3
+execute:
+  echo: false
+  warning: false
+  cache: false
+lang: es

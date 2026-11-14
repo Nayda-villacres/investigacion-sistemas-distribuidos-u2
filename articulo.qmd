@@ -1,0 +1,138 @@
+---
+title: "Comparativa de Rendimiento y Consumo de Recursos entre Arquitecturas REST (HTTP/1.1) vs. gRPC (HTTP/2 Multiplexado) bajo Concurrencia de Clientes"
+author: "Villacres Martinez Nayda Antonela"
+date: "2026-11-13"
+abstract: |
+  Se presenta un experimento reproducible de comunicación cliente-servidor en Windows para contrastar REST con HTTP/1.1 y JSON frente a gRPC con HTTP/2 y Protobuf. Un servicio eco conserva la semántica del mensaje; se varían cuatro niveles de concurrencia y dos tamaños de carga, con cinco repeticiones aleatorizadas por condición. Se registran rendimiento, latencias de cola, tiempo de CPU y memoria residente del servidor. Los resultados se calculan directamente desde el CSV experimental durante la compilación en Quarto. El alcance es un microbenchmark de loopback sin TLS: las diferencias describen las implementaciones evaluadas, sin aislar el efecto causal del transporte ni representar una red de producción. Se documentan incertidumbre, sesgos del generador cerrado y asistencia de inteligencia artificial pendiente de revisión de la investigadora.
+---
+
+```{python}
+#| label: datos
+import pandas as pd
+import json
+import numpy as np
+import matplotlib.pyplot as plt
+from IPython.display import Markdown, display
+d = pd.read_csv('results.csv')
+assert len(d)==80
+assert d.groupby(['protocol','concurrency','payload_bytes']).size().eq(5).all()
+```
+
+# Introducción
+
+La comunicación entre servicios distribuidos consume tiempo de cómputo, memoria y conexiones. La elección de una interfaz exige observar su comportamiento bajo concurrencia y verificar que una ganancia de rendimiento no oculte mayor latencia o consumo. REST es un estilo arquitectónico, mientras que gRPC es un marco RPC; compararlos exige fijar implementaciones concretas. En este estudio, REST significa un recurso HTTP POST `/echo` con JSON y HTTP/1.1; gRPC significa una llamada unaria `bench.Echo/Call` con Protobuf y HTTP/2.
+
+HTTP/2 permite flujos simultáneos sobre una conexión, pero TCP conserva el bloqueo por pérdidas a nivel de transporte [@grigorik2013; @qian2015]. Esa propiedad no garantiza una mejora universal: serialización, runtime y planificación también intervienen. La pregunta experimental es: **¿cómo cambian las solicitudes completadas por segundo, la latencia p95 y los recursos del servidor al aumentar los clientes concurrentes en estas dos pilas?** Se plantea H1: gRPC supera el rendimiento de REST a concurrencia 64; H2: gRPC consume menos CPU por solicitud. Ambas se contrastan por tamaño de carga, sin presuponer su confirmación.
+
+# Antecedentes y alcance
+
+Niswar y colaboradores comparan REST, GraphQL y gRPC mediante recuperación de datos y utilización de CPU [@niswar2024]. Su entorno contiene servicios y almacenamiento, por lo que sus cifras no constituyen predicciones para un eco local. Aquí se elimina la base de datos para examinar la comunicación con menor trabajo de aplicación. La diferencia de escenarios impide extrapolar una clasificación absoluta de protocolos.
+
+La latencia de cola importa porque episodios lentos pueden dominar servicios compuestos [@dean2013]. Por ello se presentan percentiles además del promedio. Las repeticiones y el tratamiento de la variabilidad siguen el principio de evaluación rigurosa de Georges et al. [@georges2007], aplicado aquí a Python y no a una máquina virtual Java. La unidad de repetición es una ejecución con servidor nuevo; las solicitudes de una misma ejecución no se consideran réplicas independientes.
+
+# Método experimental
+
+## Diseño y controles
+
+Se utiliza un diseño factorial de dos pilas, concurrencias 1, 8, 32 y 64, y mensajes de 256 y 4096 caracteres ASCII, equivalentes a esos bytes de texto útil. Los clientes son corutinas lógicas dentro de un generador asíncrono, no máquinas independientes. Cada una de las 16 condiciones se repite cinco veces: 80 ejecuciones. Una permutación con semilla 20261113 distribuye el orden para reducir la asociación sistemática entre tratamiento y deriva temporal. No garantiza eliminar interferencias del sistema operativo. El cliente y el servidor residen en la misma computadora y se comunican por IPv4 en loopback.
+
+Cada ejecución inicia un servidor en un proceso separado y puerto efímero, realiza un segundo de calentamiento y mide tres segundos, incluyendo el drenaje final. REST emplea `aiohttp` con un pool de hasta C conexiones persistentes sin pipelining; gRPC usa un canal compartido y solicitudes unarias concurrentes. Son políticas idiomáticas diferentes que forman parte del tratamiento. No se activa TLS, compresión, reintentos de aplicación, almacenamiento ni demora artificial. Protobuf se define mediante un descriptor embebido para conservar los ocho archivos exigidos sin depender de un compilador externo.
+
+El servicio recibe un campo `text` y devuelve su contenido. El cliente verifica igualdad en cada respuesta; REST además comprueba el estado y el servidor exige HTTP/1.1. gRPC utiliza el transporte HTTP/2 de su runtime; no se realizó captura de paquetes. El texto repetido permite controlar tamaño, pero no representa objetos numéricos o estructuras anidadas. Las bibliotecas, versiones de Python, sistema operativo, CPU lógica y memoria física se registran por fila del CSV.
+
+```{python}
+#| label: entorno
+#| output: asis
+r=d.iloc[0]
+display(Markdown(f"El equipo reportó **{int(r.logical_cpus)} CPU lógicas** y **{r.ram_gib:.1f} GiB de RAM**. Python {r.python}, aiohttp {r.aiohttp}, grpcio {r.grpcio} y psutil {r.psutil}. Plataforma: `{r.os}`. Las marcas temporales del CSV están expresadas en UTC."))
+```
+
+## Instrumentación e incertidumbre
+
+Se mide cada llamada con `perf_counter_ns`, incluyendo serialización, envío, espera, recepción, deserialización y validación. Cada trabajador envía una nueva solicitud tras finalizar la anterior: es carga cerrada sin tiempo de reflexión. El rendimiento es N/T, con N respuestas válidas y T duración real, no simplemente tres segundos nominales. El último lote puede extender T. Los errores se contabilizan por tipo y las latencias corresponden únicamente a respuestas correctas; no hay reintentos que oculten fallos.
+
+El tiempo de CPU del proceso servidor es la diferencia entre los contadores de usuario y sistema antes y después de medir. CPU\% equivale a 100 por CPU-segundos/T, donde 100\% representa un núcleo lógico, no toda la máquina. CPU por solicitud equivale a CPU-segundos por un millón dividido entre N, en microsegundos. RSS se muestrea aproximadamente cada 20 ms desde el cliente: se informa memoria residente total, no memoria incremental ni máximo absoluto. El muestreador comparte el bucle de eventos del generador y puede retrasarse bajo carga.
+
+Se conservan todas las ejecuciones, incluso con errores o duración anómala. La figura informa mediana y rango mínimo-máximo del rendimiento entre cinco repeticiones, sin atribuir cobertura probabilística a las barras. La tabla muestra medias para exponer también el efecto de ejecuciones lentas. La p95 reportada es la media de las p95 de ejecución, no el percentil de una mezcla de solicitudes. No se aplican pruebas sobre llamadas correlacionadas; las anomalías impiden sostener normalidad o estacionariedad.
+
+# Resultados
+
+Una primera batería completa registró 795882 respuestas correctas y cinco errores, concentrados en gRPC, C=8 y 256 bytes. Esa ejecución duró 415,81 s frente a tres segundos nominales; la causa no quedó identificada. Se repitió el diseño completo, sin reemplazar selectivamente una celda, añadiendo clasificación de errores. Los resultados siguientes pertenecen a la segunda batería. El CSV inicial se sobrescribió tras fallar su copia de respaldo; se conserva su registro de consola y resumen de auditoría, pero no su totalidad de datos crudos. Esta pérdida limita la trazabilidad del incidente y se declara explícitamente.
+
+```{python}
+#| label: resumen
+#| output: asis
+display(Markdown(f"Se completaron **{len(d)} ejecuciones**, **{int(d.requests.sum()):,} respuestas correctas** y **{int(d.errors.sum())} errores**. La duración medida acumulada fue {d.elapsed_s.sum():.1f} s, sin incluir calentamiento ni arranque de procesos."))
+bad=d[(d.errors>0)|(d.elapsed_s>13)]
+for _,r in bad.iterrows():
+    detail='; '.join(f'{n} {kind.replace("AioRpcError:StatusCode.", "").replace("TimeoutError", "timeouts")}' for kind,n in json.loads(r.error_types).items())
+    display(Markdown(f"Incidente de orden {int(r.order)}: {r.protocol}, C={int(r.concurrency)}, {int(r.payload_bytes)} bytes; {r.elapsed_s:.2f} s y {int(r.errors)} errores ({detail})."))
+display(Markdown("La causa de estas interrupciones no se aisló. Se retienen las filas completas: sus tiempos y fallos son observaciones del entorno, no evidencia de causalidad del protocolo. Las latencias de respuestas correctas omiten las llamadas fallidas y, por tanto, no describen la experiencia total."))
+```
+
+```{python}
+#| label: fig-rendimiento
+#| fig-cap: "Mediana y rango mínimo-máximo del rendimiento entre cinco ejecuciones, incluidas las anómalas. La carga indica bytes de texto útil."
+#| fig-width: 3.35
+#| fig-height: 2.3
+plt.rcParams.update({'font.size':8})
+fig,ax=plt.subplots(figsize=(3.35,2.3))
+for size,g in d.groupby('payload_bytes'):
+    for proto,h in g.groupby('protocol'):
+        z=h.groupby('concurrency').rps.agg(['median','min','max'])
+        ax.errorbar(z.index,z['median'],yerr=[z['median']-z['min'],z['max']-z['median']],
+                    marker='o' if proto=='REST' else 's',linestyle='-' if size==256 else '--',
+                    capsize=2,label=f'{proto} {size} B')
+ax.set_xlabel('Clientes concurrentes'); ax.set_xticks([1,8,32,64]); ax.grid(alpha=.25)
+ax.set_ylabel('Solicitudes / segundo'); ax.legend(fontsize=6.5,loc='best')
+fig.tight_layout(); plt.show()
+```
+
+La @fig-rendimiento muestra la respuesta a la concurrencia sin convertirla en una estimación de capacidad de Internet. La tabla resume cada condición; RPS y p95 se promedian entre ejecuciones. El máximo de RSS observado en cada ejecución se promedia para facilitar la comparación y no representa un límite garantizado.
+
+```{python}
+#| label: tabla-metricas
+#| output: asis
+s=d.groupby(['payload_bytes','concurrency','protocol'],sort=True).agg(rps=('rps','mean'),p95=('p95_ms','mean'),cpu=('server_cpu_us_req','mean'),rss=('server_rss_max_mib','mean'))
+lines=[r'\begin{table}[t]',r'\centering',
+       r'\caption{Medias por condición. B: bytes útiles; C: concurrencia; p95 en ms; CPU en $\mu$s/solicitud; RSS en MiB.}',
+       r'\label{tab:metricas}',r'\scriptsize\setlength{\tabcolsep}{3pt}',
+       r'\begin{tabular}{rrlrrrr}\toprule',
+       r'B & C & Pila & RPS & p95 & CPU & RSS \\ \midrule']
+for (b,c,p),r in s.iterrows():
+    lines.append(f'{b} & {c} & {p} & {r.rps:.0f} & {r.p95:.2f} & {r.cpu:.1f} & {r.rss:.1f} '+r'\\')
+lines.extend([r'\bottomrule\end{tabular}',r'\end{table}'])
+print('\n'.join(lines))
+```
+
+```{python}
+#| label: contraste
+#| output: asis
+for size in sorted(d.payload_bytes.unique()):
+    g=s.loc[(size,64)]
+    ratio=g.loc['gRPC','rps']/g.loc['REST','rps']
+    cr=g.loc['gRPC','cpu']/g.loc['REST','cpu']
+    display(Markdown(f"A C=64 y {size} bytes, la razón gRPC/REST del rendimiento medio fue **{ratio:.2f}**, y la de CPU por solicitud **{cr:.2f}**. H1 {'se cumple descriptivamente' if ratio>1 else 'no se cumple descriptivamente'}; H2 {'se cumple descriptivamente' if cr<1 else 'no se cumple descriptivamente'}. Estas comparaciones de medias no constituyen una prueba de significancia."))
+    display(Markdown(f"La p95 media fue {g.loc['gRPC','p95']:.2f} ms en gRPC y {g.loc['REST','p95']:.2f} ms en REST. Los máximos RSS promediados fueron {g.loc['gRPC','rss']:.2f} y {g.loc['REST','rss']:.2f} MiB, respectivamente; diferencias pequeñas no demuestran ahorro sistemático de memoria."))
+```
+
+# Discusión técnica
+
+Los contrastes anteriores deben leerse junto con el consumo y la latencia. Más solicitudes por segundo pueden coexistir con mayor p95 cuando crece el número de llamadas pendientes. En un generador cerrado, el propio servidor limita la tasa de llegada al retrasar respuestas; por ello el experimento no caracteriza un sistema con llegadas externas constantes ni evita la omisión coordinada. Tampoco se mide la espera de usuarios antes de incorporarse al conjunto de trabajadores.
+
+La multiplexación reduce la necesidad de conexiones, pero añade gestión de flujos y no elimina costes del runtime. REST usa JSON y un servidor Python asíncrono; gRPC combina Protobuf, bindings Python y un núcleo nativo. Un resultado favorable a cualquiera de las pilas puede provenir de estas diferencias. Para atribuir causalidad al transporte harían falta controles adicionales: mismo códec sobre ambos transportes, REST sobre HTTP/2 y distintos números de canales. Este artículo conserva el contraste asignado y no transforma la asociación observada en una demostración causal.
+
+El mensaje eco apenas realiza cómputo de negocio. Así, el coste fijo de despacho puede pesar más que el ahorro de representación. La cadena ASCII repetida no permite concluir sobre compresión ni eficiencia en esquemas con muchos campos. No se midieron bytes de red; los tamaños del diseño corresponden al texto útil, excluyendo cabeceras HTTP, JSON, Protobuf y tramas. RSS incluye runtime y bibliotecas: no equivale al tamaño del mensaje ni al consumo exclusivo del transporte.
+
+## Amenazas a la validez
+
+La máquina hospeda cliente, servidor y herramientas de trabajo, lo que introduce competencia de CPU y variación de frecuencia. Separar procesos mejora la atribución de recursos, pero no ofrece aislamiento físico. El contador de CPU de Windows tiene resolución finita y puede cuantizar diferencias cortas. Los máximos de memoria pueden escapar al muestreo. Cinco repeticiones y ventanas breves describen estabilidad local limitada; no justifican compromisos de capacidad o disponibilidad.
+
+Loopback excluye distancia, congestión, pérdida y retransmisión: precisamente factores que modifican el efecto de multiplexar sobre TCP [@qian2015]. La ausencia de TLS elimina negociación y cifrado, por lo que los resultados no describen directamente despliegues seguros. No se fijan afinidad ni políticas de energía. La aleatorización y el CSV completo permiten detectar variación, pero no sustituyen experimentos en varios equipos, versiones y redes.
+
+# Conclusiones y reproducibilidad
+
+El experimento entrega un contraste empírico reproducible entre REST HTTP/1.1 y gRPC HTTP/2 bajo concurrencia, con verificación funcional y recursos del servidor identificados. Las razones calculadas determinan el sentido de H1 y H2 para este entorno; no se recomienda una migración universal. Una decisión de ingeniería debe añadir carga representativa, red real, TLS y objetivos de latencia antes de seleccionar una pila.
+
+`benchmark.py` genera `results.csv`; Quarto vuelve a calcular tablas, figura y contrastes desde ese archivo. Compilar no vuelve a ejecutar la carga, para conservar los datos originales. El README especifica instalación y comandos. La asistencia de Codex y las consultas reales a OpenCode se documentan en `PROMPTS_OPENCODE.md`. El texto y las decisiones requieren revisión y aceptación de la investigadora; no se afirma que esa supervisión humana ya haya ocurrido.
+
