@@ -285,6 +285,18 @@ Después de recibir los resultados y la explicación, la autora respondió en el
 
 Esta respuesta documenta su aceptación e interpretación de la conclusión limitada al escenario probado. No se transforma esa aceptación en una afirmación de cambios de código, ni en una aprobación individual de todas las mejoras futuras: el benchmark y el CSV original permanecen sin modificaciones. La autora reconoce los límites del entorno local y evita declarar superioridad universal de una arquitectura.
 
+### Ampliación del análisis personal tras revisar las limitaciones
+
+La autora indicó que había consultado las limitaciones documentadas y aportó el siguiente análisis académico:
+
+> Después de revisar los resultados obtenidos, considero que REST presentó un mejor rendimiento que gRPC en las pruebas realizadas, especialmente al trabajar con diferentes cantidades de clientes concurrentes. Sin embargo, también observé que algunas ejecuciones presentaron errores y tiempos de respuesta elevados, lo que demuestra que los resultados no fueron completamente uniformes.
+>
+> Desde mi punto de vista, es importante considerar que las pruebas se realizaron en una sola computadora, donde el cliente y el servidor compartían recursos. Además, ambas arquitecturas utilizaron diferentes métodos de serialización y gestión de conexiones, lo que también pudo influir en su rendimiento.
+>
+> Por esta razón, considero que REST tuvo un mejor comportamiento en las condiciones evaluadas, pero no sería correcto afirmar que siempre es superior a gRPC. Para obtener una conclusión más amplia, sería necesario realizar pruebas en diferentes equipos y condiciones de red.
+
+Esta intervención documenta que la autora examinó las limitaciones y relacionó su conclusión con la variación observada, las incidencias, los recursos compartidos y las diferencias entre pilas. Se conserva como valoración personal comunicada por ella. La referencia a ejecuciones con errores corresponde al conjunto original publicado; la validación complementaria de 48 ejecuciones registró cero errores. La interpretación no atribuye una causa demostrada a las interrupciones ni sustituye los datos experimentales. No se registra como una modificación del código o como una auditoría personal de cada línea que la autora no haya descrito.
+
 
 ### Captura completa de la nueva validación
 
