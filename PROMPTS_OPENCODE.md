@@ -277,6 +277,14 @@ Posibles explicaciones, **no causas demostradas**: gestión de llamadas y flujos
 
 La conclusión propuesta es: «REST rindió mejor en este microbenchmark local, pero los confusores y la variación impiden generalizar a todas las redes y aplicaciones». Es una propuesta técnica de Codex que la autora debe valorar con su propio juicio; no se presenta como una declaración suya antes de recibir su respuesta.
 
+### Valoración personal comunicada por la investigadora
+
+Después de recibir los resultados y la explicación, la autora respondió en el chat:
+
+> De acuerdo con los resultados obtenidos, considero que REST presentó un mejor rendimiento que gRPC en las pruebas realizadas. Sin embargo, también es importante reconocer que estos resultados corresponden a un entorno local y que existen factores que pudieron influir en las mediciones, como el consumo de recursos del equipo, la cantidad de clientes concurrentes y las variaciones durante la ejecución. Por esta razón, considero que no sería correcto afirmar que REST es superior a gRPC en todos los escenarios, ya que el comportamiento de ambas arquitecturas puede cambiar dependiendo de las condiciones de la red y de las características de cada aplicación.
+
+Esta respuesta documenta su aceptación e interpretación de la conclusión limitada al escenario probado. No se transforma esa aceptación en una afirmación de cambios de código, ni en una aprobación individual de todas las mejoras futuras: el benchmark y el CSV original permanecen sin modificaciones. La autora reconoce los límites del entorno local y evita declarar superioridad universal de una arquitectura.
+
 
 ### Captura completa de la nueva validación
 
