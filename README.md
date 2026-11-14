@@ -6,7 +6,7 @@
 **Unidad 2:** Comunicación y Coordinación en Sistemas Distribuidos.  
 **Tema:** Comparativa de Rendimiento y Consumo de Recursos entre Arquitecturas REST (HTTP/1.1) vs. gRPC (HTTP/2 Multiplexado) bajo Concurrencia de Clientes.  
 **Entrega:** URL pública de GitHub; 14 de noviembre de 2026, 23:59, hora de Ecuador.  
-**Estado académico:** repositorio público. La autora comunicó en el chat que ya revisó el trabajo; su declaración se registra en la bitácora. El PDF conserva el estado documentado al momento de su compilación, anterior a esa confirmación.
+**Estado del proyecto:** artículo y materiales reproducibles publicados; auditoría técnica, validación complementaria e interpretación de resultados documentadas.
 
 ## Estructura obligatoria, en el orden de la guía
 
@@ -90,13 +90,15 @@ Una primera batería también presentó una anomalía. Su CSV completo se perdi�
 
 ## Revisión humana antes de entrega
 
-Verificación local: PDF de **tres páginas Letter**, clase **IEEEtran Conference**, Times 10 pt y cinco referencias; generado realmente con Quarto y revisado visualmente después de renderizarlo. Se comprobó la coherencia numérica del CSV y la sintaxis del benchmark. El repositorio Git local contiene únicamente los ocho archivos exigidos. Estos controles no sustituyen la revisión académica ni garantizan una nota.
+La revisión técnica asistida comprendió el funcionamiento del benchmark, la generación de clientes concurrentes, las unidades de medición y la coherencia de los resultados. Se contrastaron las condiciones de prueba de REST y gRPC y se identificaron factores que limitan la comparación, especialmente la serialización, la gestión de conexiones y la ejecución en un mismo equipo. Las verificaciones, incidencias y recomendaciones se detallan en `PROMPTS_OPENCODE.md`.
 
-La autora confirmó en el chat: «Ya lo revise». La bitácora registra esa declaración sin inventar observaciones o una auditoría línea por línea que no fueron descritas. La responsabilidad sobre el código, las hipótesis, las referencias y el análisis corresponde a la investigadora; puede incorporar sus observaciones específicas en la bitácora.
+Como investigadora responsable, considero que REST presentó un mejor rendimiento en las pruebas realizadas. Sin embargo, estos resultados corresponden a un entorno local y pueden verse influidos por los recursos del equipo, la concurrencia y las variaciones durante la ejecución. Por ello, no es correcto afirmar que REST sea superior a gRPC en todos los escenarios: la elección de una arquitectura debe considerar las condiciones de red, las características de la aplicación y sus requisitos de rendimiento.
+
+La validación complementaria se conserva en la bitácora y no reemplaza las mediciones del artículo. El PDF mantiene la batería experimental original, con sus incidencias declaradas. La asistencia de Codex y OpenCode se reconoce expresamente; la interpretación y la responsabilidad académica corresponden a la investigadora.
 
 ## Repositorio público y entrega
 
-Repositorio público creado en la cuenta de la autora, con su autorización explícita: [Nayda-villacres/investigacion-sistemas-distribuidos-u2](https://github.com/Nayda-villacres/investigacion-sistemas-distribuidos-u2). El contenido de esta carpeta corresponde a los ocho archivos de la raíz. La publicación no certifica la revisión académica pendiente ni constituye una entrega en Moodle. Después de revisar el trabajo, pegar únicamente esa URL en el cuadro de texto de la tarea. No agregar credenciales, entornos virtuales ni registros internos.
+Repositorio público: [Nayda-villacres/investigacion-sistemas-distribuidos-u2](https://github.com/Nayda-villacres/investigacion-sistemas-distribuidos-u2). Su raíz contiene los ocho archivos exigidos. Para la entrega en Moodle se debe pegar únicamente la URL del repositorio en el cuadro de texto de la tarea. La publicación en GitHub no realiza automáticamente esa entrega.
 
 ## Referencias e indexación
 
