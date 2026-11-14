@@ -6,7 +6,23 @@
 **Unidad 2:** Comunicación y Coordinación en Sistemas Distribuidos.  
 **Tema:** Comparativa de Rendimiento y Consumo de Recursos entre Arquitecturas REST (HTTP/1.1) vs. gRPC (HTTP/2 Multiplexado) bajo Concurrencia de Clientes.  
 **Entrega:** URL pública de GitHub; 14 de noviembre de 2026, 23:59, hora de Ecuador.  
-**Estado académico:** versión experimental para revisión de la investigadora. La revisión humana y la publicación pública no se presuponen completadas.
+**Estado académico:** repositorio público. La autora comunicó en el chat que ya revisó el trabajo; su declaración se registra en la bitácora. El PDF conserva el estado documentado al momento de su compilación, anterior a esa confirmación.
+
+## Estructura obligatoria, en el orden de la guía
+
+```text
+investigacion-sistemas-distribuidos-u2/
+├── articulo.pdf
+├── articulo.qmd
+├── references.bib
+├── _quarto.yml
+├── benchmark.py
+├── results.csv
+├── README.md
+└── PROMPTS_OPENCODE.md
+```
+
+Este es el orden de presentación solicitado. GitHub muestra su lista de archivos ordenada automáticamente por nombre; los nombres se mantienen exactamente como exige la guía.
 
 ## Abstract
 
@@ -76,7 +92,7 @@ Una primera batería también presentó una anomalía. Su CSV completo se perdi�
 
 Verificación local: PDF de **tres páginas Letter**, clase **IEEEtran Conference**, Times 10 pt y cinco referencias; generado realmente con Quarto y revisado visualmente después de renderizarlo. Se comprobó la coherencia numérica del CSV y la sintaxis del benchmark. El repositorio Git local contiene únicamente los ocho archivos exigidos. Estos controles no sustituyen la revisión académica ni garantizan una nota.
 
-La investigadora debe revisar el código, aceptar o corregir las hipótesis y el análisis, comprobar las referencias y leer el PDF. Debe registrar su revisión real en la bitácora antes de declarar concluido el componente Human-in-the-Loop. Codex no puede certificar una revisión que la autora no ha realizado.
+La autora confirmó en el chat: «Ya lo revise». La bitácora registra esa declaración sin inventar observaciones o una auditoría línea por línea que no fueron descritas. La responsabilidad sobre el código, las hipótesis, las referencias y el análisis corresponde a la investigadora; puede incorporar sus observaciones específicas en la bitácora.
 
 ## Repositorio público y entrega
 

@@ -89,10 +89,18 @@ Se retiró el requisito inicial de cero errores del análisis, manteniendo la va
 
 Los datos del CSV entregado proceden de llamadas locales reales, no de valores inventados. Se declara asistencia sustancial de Codex en programación, experimentación, redacción y revisión, y asistencia de OpenCode en propuestas de código y maquetación. Las fuentes y sugerencias de IA se comprobaron y se rechazaron errores concretos, incluidos números ilustrativos y una asociación bibliográfica falsa.
 
-**Pendiente de la investigadora:** leer el código y PDF, revisar hipótesis y límites, contrastar referencias, aceptar o corregir el análisis y registrar aquí la fecha y sus observaciones reales. Este documento no afirma una revisión humana ya efectuada. La responsabilidad académica corresponde a la autora y debe respetarse la política de su institución.
+**Estado al finalizar la preparación local:** estaba pendiente la revisión de la investigadora. La responsabilidad académica corresponde a la autora y debe respetarse la política de su institución. Véase la confirmación posterior registrada al final de esta bitácora.
 
 Al cerrar la preparación local, la publicación pública y la entrega en Moodle todavía no se habían realizado.
 
 ## Actualización posterior: publicación autorizada
 
 La usuaria solicitó expresamente publicar los ocho archivos y proporcionó su cuenta `Nayda-villacres`. Tras resolver dificultades del control de ventanas, Codex accedió a su sesión de GitHub en Chrome y creó el repositorio público [investigacion-sistemas-distribuidos-u2](https://github.com/Nayda-villacres/investigacion-sistemas-distribuidos-u2). Se preparó la carga de los ocho archivos sin credenciales ni registros internos. La autorización de publicación no se interpreta como una revisión académica ya realizada. No se efectuó una entrega en Moodle.
+
+Los ocho archivos se publicaron y se verificó su acceso mediante la API pública de GitHub sin autenticación. Sus identificadores de contenido coincidieron con los ocho archivos locales.
+
+## Confirmación posterior de revisión humana
+
+Después de la publicación, la autora comunicó en el chat: «Ya lo revise», y solicitó presentar los archivos en el orden de la guía. Se registra su confirmación de revisión, sin atribuirle observaciones concretas, cambios de análisis o una auditoría línea por línea no descritos. El README incorpora la estructura en el orden solicitado; la lista nativa de GitHub conserva su orden automático por nombre. El PDF es el compilado anterior a esta confirmación y no se modificaron los resultados experimentales.
+
+También se confirmó que OpenCode fue ejecutado desde su instalación local de Windows: `opencode v2.2.7`, localizado por PowerShell en `C:\Users\Nani\AppData\Roaming\npm\opencode.ps1`. Codex realizó gran parte de la programación, experimentación y redacción; OpenCode aportó las consultas y respuestas documentadas, incluidas propuestas corregidas. No se atribuye todo el trabajo exclusivamente a OpenCode.
